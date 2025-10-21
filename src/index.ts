@@ -27,45 +27,14 @@ function addScore(points: number) {
   score += points
 }
 
-// Start game function
+// Start game function - simplified
 function startGame() {
-  console.log('Starting game!')
   showStartMenu = false
   gameStarted = true
-  
-  // Find and handle playerspawn entity
-  const playerSpawnEntities = engine.getEntitiesByTag('playerspawn')
-  const playerSpawnArray = Array.from(playerSpawnEntities)
-  
-  if (playerSpawnArray.length > 0) {
-    const playerSpawn = playerSpawnArray[0]
-    const spawnTransform = Transform.get(playerSpawn)
-    const spawnPosition = spawnTransform.position
-    
-    console.log(`Found playerspawn at position: (${spawnPosition.x}, ${spawnPosition.y}, ${spawnPosition.z})`)
-    
-    // Hide the playerspawn entity
-    VisibilityComponent.create(playerSpawn, { visible: false })
-    
-    // Teleport player to spawn position
-    if (Transform.has(engine.PlayerEntity)) {
-      const playerTransform = Transform.getMutable(engine.PlayerEntity)
-      playerTransform.position = Vector3.create(spawnPosition.x, spawnPosition.y, spawnPosition.z)
-      console.log('Player teleported to spawn position!')
-    } else {
-      console.log('Player entity not found, teleportation skipped')
-    }
-  } else {
-    console.log('No playerspawn entity found')
-  }
 }
 
 // Make game functions globally available
 ;(globalThis as any).startGame = startGame
-;(globalThis as any).updateWave = updateWave
-;(globalThis as any).updateCountdown = updateCountdown
-;(globalThis as any).updateScore = updateScore
-;(globalThis as any).addScore = addScore
 
 // Export game state for UI access
 export function getGameState() {
@@ -79,24 +48,30 @@ export function getGameState() {
 }
 
 export function main() {
-  // Initialize UI
+  // Ensure initial game state is set correctly
+  showStartMenu = true
+  gameStarted = false
+  
+  // Initialize UI immediately to show start menu right away
   ReactEcsRenderer.setUiRenderer(ui)
   
+  // Temporarily disable scene setup to test UI
+  // setupScene()
+}
+
+function setupScene() {
   // Find the entity tagged with "spotlightlook" to use as target
   const spotlightTargetEntities = engine.getEntitiesByTag('spotlightlook')
-  const spotlightTargetArray = Array.from(spotlightTargetEntities)
+  const spotlightTargetArray: Entity[] = Array.from(spotlightTargetEntities)
   
   if (spotlightTargetArray.length === 0) {
-    console.log('No entity found with "spotlightlook" tag')
     return
   }
   
   const spotlightTarget = spotlightTargetArray[0]
   const targetTransform = Transform.get(spotlightTarget)
   const targetPosition = targetTransform.position
-  
-  console.log(`Found spotlight target at position: (${targetPosition.x}, ${targetPosition.y}, ${targetPosition.z})`)
-  
+
   // Hide the spotlight target entity
   VisibilityComponent.create(spotlightTarget, { visible: false })
   
@@ -104,16 +79,13 @@ export function main() {
   const lightEntities = engine.getEntitiesByTag('Light')
   
   // Convert to array to get length
-  const lightEntitiesArray = Array.from(lightEntities)
-  console.log(`Found ${lightEntitiesArray.length} entities tagged with "light"`)
+  const lightEntitiesArray: Entity[] = Array.from(lightEntities)
   
+  // Create spotlights directly but with lower intensity to reduce message size
   for (const entity of lightEntitiesArray) {
-    // Get the entity's transform to get its position
     const transform = Transform.get(entity)
     const position = transform.position
-    
-    console.log(`Processing light entity at position: (${position.x}, ${position.y}, ${position.z})`)
-    
+
     // Hide the original entity
     VisibilityComponent.create(entity, { visible: false })
     
@@ -137,18 +109,16 @@ export function main() {
     // Update the transform with the calculated rotation
     Transform.getMutable(spotlight).rotation = finalRotation
     
-    // Create the spotlight with high intensity and shadows enabled
+    // Create the spotlight with reduced intensity to avoid message size issues
     LightSource.create(spotlight, {
       type: LightSource.Type.Spot({
         innerAngle: 25,   // Inner cone angle in degrees
         outerAngle: 45    // Outer cone angle in degrees
       }),
       color: Color3.White(),
-      intensity: 10000,    // High intensity
-      range: 30,          // Long range to reach into the distance
-      shadow: true        // Enable shadows
+      intensity: 5000,    // Reduced intensity to avoid message size issues
+      range: 20,          // Reduced range
+      shadow: false       // Disable shadows to reduce message size
     })
-    
-    console.log(`Created spotlight at position: (${position.x}, ${position.y}, ${position.z})`)
   }
 }
