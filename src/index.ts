@@ -1,10 +1,82 @@
 import { Vector3, Quaternion, Color3 } from '@dcl/sdk/math'
 import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags } from '@dcl/sdk/ecs'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
-import { ui, startGame } from './ui'
+import { ui } from './ui'
 
-// Make startGame function globally available
+// Game state variables
+let showStartMenu = true
+let currentWave = 1
+let countdownTime = 30 // seconds
+let score = 0
+let gameStarted = false
+
+// Game state update functions
+function updateWave(wave: number) {
+  currentWave = wave
+}
+
+function updateCountdown(time: number) {
+  countdownTime = time
+}
+
+function updateScore(newScore: number) {
+  score = newScore
+}
+
+function addScore(points: number) {
+  score += points
+}
+
+// Start game function
+function startGame() {
+  console.log('Starting game!')
+  showStartMenu = false
+  gameStarted = true
+  
+  // Find and handle playerspawn entity
+  const playerSpawnEntities = engine.getEntitiesByTag('playerspawn')
+  const playerSpawnArray = Array.from(playerSpawnEntities)
+  
+  if (playerSpawnArray.length > 0) {
+    const playerSpawn = playerSpawnArray[0]
+    const spawnTransform = Transform.get(playerSpawn)
+    const spawnPosition = spawnTransform.position
+    
+    console.log(`Found playerspawn at position: (${spawnPosition.x}, ${spawnPosition.y}, ${spawnPosition.z})`)
+    
+    // Hide the playerspawn entity
+    VisibilityComponent.create(playerSpawn, { visible: false })
+    
+    // Teleport player to spawn position
+    if (Transform.has(engine.PlayerEntity)) {
+      const playerTransform = Transform.getMutable(engine.PlayerEntity)
+      playerTransform.position = Vector3.create(spawnPosition.x, spawnPosition.y, spawnPosition.z)
+      console.log('Player teleported to spawn position!')
+    } else {
+      console.log('Player entity not found, teleportation skipped')
+    }
+  } else {
+    console.log('No playerspawn entity found')
+  }
+}
+
+// Make game functions globally available
 ;(globalThis as any).startGame = startGame
+;(globalThis as any).updateWave = updateWave
+;(globalThis as any).updateCountdown = updateCountdown
+;(globalThis as any).updateScore = updateScore
+;(globalThis as any).addScore = addScore
+
+// Export game state for UI access
+export function getGameState() {
+  return {
+    showStartMenu,
+    currentWave,
+    countdownTime,
+    score,
+    gameStarted
+  }
+}
 
 export function main() {
   // Initialize UI
