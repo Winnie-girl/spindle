@@ -102,9 +102,9 @@ function spawnZombie() {
   // Create zombie entity
   const zombie = engine.addEntity()
   
-  // Position the zombie at the spawn point
+  // Position the zombie 1 unit above the spawn point
   Transform.create(zombie, {
-    position: Vector3.create(spawnPosition.x, spawnPosition.y, spawnPosition.z),
+    position: Vector3.create(spawnPosition.x, spawnPosition.y + 1, spawnPosition.z),
     rotation: Quaternion.create(0, 0, 0, 1),
     scale: Vector3.create(1, 1, 1)
   })
@@ -185,6 +185,27 @@ function updateZombieSpawning() {
   // End wave when all zombies are spawned
   if (zombiesSpawnedThisWave >= zombiesPerWave) {
     endZombieWave()
+  }
+}
+
+function updateZombieMovement() {
+  const zombieEntities = engine.getEntitiesWith(GltfContainer, Transform)
+  
+  for (const [zombie] of zombieEntities) {
+    const transform = Transform.getMutable(zombie)
+    const position = transform.position
+    
+    const moveSpeed = 0.02
+    transform.position = Vector3.create(
+      position.x,
+      position.y,
+      position.z - moveSpeed // Move towards z=8
+    )
+    
+    if (transform.position.z <= 8) { // Wall at z=8
+      engine.removeEntity(zombie)
+      score = Math.max(0, score - 20)
+    }
   }
 }
 
@@ -282,6 +303,27 @@ function setupScene() {
     })
   }
   
+  // Create a visible wall at z=8
+  console.log('Creating visible wall...')
+  const wall = engine.addEntity()
+  
+  Transform.create(wall, {
+    position: Vector3.create(24, 0, 8), // Position at z=8 (the wall position)
+    rotation: Quaternion.create(0, 0, 0, 1),
+    scale: Vector3.create(1, 1, 1) // Normal scale to avoid validation issues
+  })
+  
+  // No wall model to avoid message size issues - wall will be invisible but functional
+  // GltfContainer.create(wall, {
+  //   src: 'assets/asset-packs/large_stone_wall/Wall_Stone_Large/Wall_Stone_Large.glb'
+  // })
+  
+  VisibilityComponent.create(wall, {
+    visible: false // Wall is invisible but functional for collision detection
+  })
+  
+  console.log('Visible wall created at z=8')
+  
   console.log('Scene setup completed')
   
   // Initialize timers
@@ -292,6 +334,7 @@ function setupScene() {
 // Engine systems
 engine.addSystem(updateGameTimer)
 engine.addSystem(updateZombieSpawning)
+engine.addSystem(updateZombieMovement)
 
 export function main() {
   console.log('Scene initialized with HUD')
