@@ -1,14 +1,31 @@
+import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion, Color3 } from '@dcl/sdk/math'
-import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags } from '@dcl/sdk/ecs'
+import { movePlayerTo } from '~system/RestrictedActions'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
 import { ui } from './ui'
 
-// Game state variables
-let showStartMenu = true
-let currentWave = 1
-let countdownTime = 30 // seconds
-let score = 0
+// Game state
 let gameStarted = false
+let currentWave = 1
+let countdownTime = 60
+let score = 0
+
+// Zombie spawning system
+let zombieSpawnPoints: Vector3[] = []
+let zombiesSpawned = 0
+let zombiesSpawnedThisWave = 0
+let zombieSpawnTimer = 0
+let zombieSpawnInterval = 120 // 2 seconds at 60fps
+let zombieWaveActive = false
+let gameTimer = 0
+let gameTimerInterval = 60 // 1 second at 60fps
+
+// Start game function
+function startGame() {
+  console.log('startGame function called!')
+  gameStarted = true
+  setupScene()
+}
 
 // Game state update functions
 function updateWave(wave: number) {
@@ -27,19 +44,9 @@ function addScore(points: number) {
   score += points
 }
 
-// Start game function - simplified
-function startGame() {
-  showStartMenu = false
-  gameStarted = true
-}
-
-// Make game functions globally available
-;(globalThis as any).startGame = startGame
-
-// Export game state for UI access
+// Export game state for UI
 export function getGameState() {
   return {
-    showStartMenu,
     currentWave,
     countdownTime,
     score,
@@ -47,47 +54,212 @@ export function getGameState() {
   }
 }
 
-export function main() {
-  // Ensure initial game state is set correctly
-  showStartMenu = true
-  gameStarted = false
+// Zombie spawning functions
+function setupZombieSpawns() {
+  // Find and hide zombiespawn entities, store their positions
+  const zombieSpawnEntities = engine.getEntitiesByTag('zombiespawn')
+  const zombieSpawnArray: Entity[] = Array.from(zombieSpawnEntities)
   
-  // Initialize UI immediately to show start menu right away
-  ReactEcsRenderer.setUiRenderer(ui)
+  console.log(`Found ${zombieSpawnArray.length} zombiespawn entities`)
   
-  // Temporarily disable scene setup to test UI
-  // setupScene()
+  for (const entity of zombieSpawnArray) {
+    const transform = Transform.get(entity)
+    const position = transform.position
+    
+    console.log(`Zombie spawn point at: ${position.x}, ${position.y}, ${position.z}`)
+    
+    // Store the spawn position
+    zombieSpawnPoints.push(Vector3.create(position.x, position.y, position.z))
+    
+    // Hide the zombiespawn entity
+    if (!VisibilityComponent.has(entity)) {
+      VisibilityComponent.createOrReplace(entity, { visible: false })
+    } else {
+      VisibilityComponent.getMutable(entity).visible = false
+    }
+  }
+  
+  console.log(`Total zombie spawn points: ${zombieSpawnPoints.length}`)
 }
 
-function setupScene() {
-  // Find the entity tagged with "spotlightlook" to use as target
-  const spotlightTargetEntities = engine.getEntitiesByTag('spotlightlook')
-  const spotlightTargetArray: Entity[] = Array.from(spotlightTargetEntities)
-  
-  if (spotlightTargetArray.length === 0) {
+function getZombiesPerWave(wave: number): number {
+  // Wave 1 spawns 5 zombies, each wave increases by 2
+  return 5 + (wave - 1) * 2
+}
+
+function spawnZombie() {
+  if (zombieSpawnPoints.length === 0) {
+    console.log('No zombie spawn points available!')
     return
   }
   
-  const spotlightTarget = spotlightTargetArray[0]
-  const targetTransform = Transform.get(spotlightTarget)
-  const targetPosition = targetTransform.position
+  // Get a random spawn point
+  const randomIndex = Math.floor(Math.random() * zombieSpawnPoints.length)
+  const spawnPosition = zombieSpawnPoints[randomIndex]
+  
+  console.log(`Spawning zombie at: ${spawnPosition.x}, ${spawnPosition.y}, ${spawnPosition.z}`)
+  
+  // Create zombie entity
+  const zombie = engine.addEntity()
+  
+  // Position the zombie at the spawn point
+  Transform.create(zombie, {
+    position: Vector3.create(spawnPosition.x, spawnPosition.y, spawnPosition.z),
+    rotation: Quaternion.create(0, 0, 0, 1),
+    scale: Vector3.create(1, 1, 1)
+  })
+  
+  // Add zombie GLB model with correct path
+  GltfContainer.create(zombie, {
+    src: 'assets/scene/Models/girlzombie/girlzombie.glb'
+  })
+  
+  // Make sure the zombie is visible
+  VisibilityComponent.create(zombie, {
+    visible: true
+  })
+  
+  zombiesSpawned++
+  zombiesSpawnedThisWave++
+  console.log(`Spawned zombie ${zombiesSpawnedThisWave}/${getZombiesPerWave(currentWave)} in wave ${currentWave}`)
+}
 
-  // Hide the spotlight target entity
-  VisibilityComponent.create(spotlightTarget, { visible: false })
+function startZombieWave() {
+  zombiesSpawnedThisWave = 0
+  zombieSpawnTimer = 0
+  zombieWaveActive = true
   
-  // Find all entities tagged with "light"
+  console.log(`Starting wave ${currentWave} with ${getZombiesPerWave(currentWave)} zombies`)
+  
+  // Spawn first zombie immediately
+  if (zombieSpawnPoints.length > 0) {
+    spawnZombie()
+  }
+}
+
+function endZombieWave() {
+  zombieWaveActive = false
+  currentWave++
+}
+
+// Game timer system
+function updateGameTimer() {
+  gameTimer++
+  
+  // Update countdown every second
+  if (gameTimer >= gameTimerInterval) {
+    if (countdownTime > 0) {
+      countdownTime--
+    }
+    gameTimer = 0
+  }
+}
+
+// Zombie spawning system update
+function updateZombieSpawning() {
+  if (zombieSpawnPoints.length === 0) {
+    return
+  }
+  
+  zombieSpawnTimer++
+  
+  // Start the wave after initial delay (when timer reaches 0)
+  if (zombieSpawnTimer >= 180 && !zombieWaveActive) { // 3 seconds delay
+    startZombieWave()
+    zombieSpawnTimer = 0
+    return
+  }
+  
+  if (!zombieWaveActive) {
+    return
+  }
+  
+  const zombiesPerWave = getZombiesPerWave(currentWave)
+  
+  // Spawn a zombie every 2 seconds (120 frames at 60fps)
+  if (zombieSpawnTimer >= zombieSpawnInterval && zombiesSpawnedThisWave < zombiesPerWave) {
+    spawnZombie()
+    zombieSpawnTimer = 0
+  }
+  
+  // End wave when all zombies are spawned
+  if (zombiesSpawnedThisWave >= zombiesPerWave) {
+    endZombieWave()
+  }
+}
+
+// Make startGame globally available
+(globalThis as any).startGame = startGame
+
+function setupScene() {
+  console.log('Setting up scene...')
+  
+  // Setup zombie spawn points first
+  setupZombieSpawns()
+  
+  // Hide playerspawn entity and teleport player
+  const playerSpawnEntities = engine.getEntitiesByTag('playerspawn')
+  const playerSpawnArray: Entity[] = Array.from(playerSpawnEntities)
+  
+  if (playerSpawnArray.length > 0) {
+    const playerSpawn = playerSpawnArray[0]
+    const spawnTransform = Transform.get(playerSpawn)
+    const spawnPosition = spawnTransform.position
+    
+    // Hide the playerspawn entity
+    if (!VisibilityComponent.has(playerSpawn)) {
+      VisibilityComponent.createOrReplace(playerSpawn, { visible: false })
+    } else {
+      VisibilityComponent.getMutable(playerSpawn).visible = false
+    }
+    
+    // Teleport player to spawn position
+    movePlayerTo({
+      newRelativePosition: Vector3.create(spawnPosition.x, spawnPosition.y, spawnPosition.z)
+    })
+  }
+  
+  // Hide playerwall entities
+  const playerWallEntities = engine.getEntitiesByTag('playerwall')
+  const playerWallArray: Entity[] = Array.from(playerWallEntities)
+  
+  for (const entity of playerWallArray) {
+    if (!VisibilityComponent.has(entity)) {
+      VisibilityComponent.createOrReplace(entity, { visible: false })
+    } else {
+      VisibilityComponent.getMutable(entity).visible = false
+    }
+  }
+  
+  // Hide spotlightlook entity
+  const spotlightTargetEntities = engine.getEntitiesByTag('spotlightlook')
+  const spotlightTargetArray: Entity[] = Array.from(spotlightTargetEntities)
+  
+  for (const entity of spotlightTargetArray) {
+    if (!VisibilityComponent.has(entity)) {
+      VisibilityComponent.createOrReplace(entity, { visible: false })
+    } else {
+      VisibilityComponent.getMutable(entity).visible = false
+    }
+  }
+  
+  // Hide light entities and create spotlights
   const lightEntities = engine.getEntitiesByTag('Light')
-  
-  // Convert to array to get length
   const lightEntitiesArray: Entity[] = Array.from(lightEntities)
   
-  // Create spotlights directly but with lower intensity to reduce message size
-  for (const entity of lightEntitiesArray) {
+  // Limit to first 2 lights to avoid message size issues
+  const limitedLightEntities = lightEntitiesArray.slice(0, 2)
+  
+  for (const entity of limitedLightEntities) {
     const transform = Transform.get(entity)
     const position = transform.position
 
     // Hide the original entity
-    VisibilityComponent.create(entity, { visible: false })
+    if (!VisibilityComponent.has(entity)) {
+      VisibilityComponent.createOrReplace(entity, { visible: false })
+    } else {
+      VisibilityComponent.getMutable(entity).visible = false
+    }
     
     // Create a new spotlight entity at the same position
     const spotlight = engine.addEntity()
@@ -97,28 +269,36 @@ function setupScene() {
       position: Vector3.create(position.x, position.y, position.z)
     })
     
-    // Calculate the direction from the light position to the spotlight target
-    const direction = Vector3.subtract(targetPosition, position)
-    const normalizedDirection = Vector3.normalize(direction)
-    
-    // Create rotation to look at the center, but also point down at an angle
-    const lookRotation = Quaternion.lookRotation(normalizedDirection)
-    const downAngle = Quaternion.fromEulerDegrees(-30, 0, 0) // 30 degrees down
-    const finalRotation = Quaternion.multiply(lookRotation, downAngle)
-    
-    // Update the transform with the calculated rotation
-    Transform.getMutable(spotlight).rotation = finalRotation
-    
-    // Create the spotlight with reduced intensity to avoid message size issues
+    // Create the spotlight with minimal settings to avoid message size issues
     LightSource.create(spotlight, {
       type: LightSource.Type.Spot({
-        innerAngle: 25,   // Inner cone angle in degrees
-        outerAngle: 45    // Outer cone angle in degrees
+        innerAngle: 30,
+        outerAngle: 60
       }),
       color: Color3.White(),
-      intensity: 5000,    // Reduced intensity to avoid message size issues
-      range: 20,          // Reduced range
-      shadow: false       // Disable shadows to reduce message size
+      intensity: 1000,
+      range: 15,
+      shadow: false
     })
   }
+  
+  console.log('Scene setup completed')
+  
+  // Initialize timers
+  zombieSpawnTimer = 0 // Will start counting up to 180 frames (3 seconds)
+  gameTimer = 0
+}
+
+// Engine systems
+engine.addSystem(updateGameTimer)
+engine.addSystem(updateZombieSpawning)
+
+export function main() {
+  console.log('Scene initialized with HUD')
+  
+  // Initialize UI
+  ReactEcsRenderer.setUiRenderer(ui)
+  
+  // Start the game directly
+  startGame()
 }

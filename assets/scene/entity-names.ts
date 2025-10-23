@@ -10,6 +10,12 @@ export enum EntityNames {
   Cube_2_3 = "Cube_2_3",
   Cube_2_4 = "Cube_2_4",
   Cube_3 = "Cube_3",
+  Cube_4 = "Cube_4",
+  Cube_5 = "Cube_5",
+  Cube_6 = "Cube_6",
+  Cube_7 = "Cube_7",
+  Cube_8 = "Cube_8",
+  Cube_9 = "Cube_9",
   cornwall_glb = "cornwall.glb",
   girlzombie_glb = "girlzombie.glb",
 } 

@@ -116,18 +116,60 @@
             "position": {
               "x": 16.25,
               "y": 0,
-              "z": 6.25
+              "z": 7.25
             },
             "scale": {
               "x": 15.5,
               "y": 21,
-              "z": 28
+              "z": 31
             },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
+            },
+            "parent": 0
+          }
+        },
+        "516": {
+          "json": {
+            "position": {
+              "x": 4.25,
+              "y": 0,
+              "z": 27
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "517": {
+          "json": {
+            "position": {
+              "x": 9.75,
+              "y": 0,
+              "z": 23
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
             },
             "parent": 0
           }
@@ -156,14 +198,9 @@
         "519": {
           "json": {
             "position": {
-              "x": 3.25,
-              "y": 1.5,
-              "z": 23.5
-            },
-            "scale": {
-              "x": 2,
-              "y": 1,
-              "z": 2
+              "x": 27.75,
+              "y": 7.5,
+              "z": 7.25
             },
             "rotation": {
               "x": 0.08720000088214874,
@@ -171,15 +208,20 @@
               "z": -0.00139999995008111,
               "w": 0.9959999918937683
             },
+            "scale": {
+              "x": 2,
+              "y": 1,
+              "z": 2
+            },
             "parent": 0
           }
         },
         "520": {
           "json": {
             "position": {
-              "x": 3.75,
+              "x": 5.5,
               "y": 7.5,
-              "z": 3.5
+              "z": 4.25
             },
             "scale": {
               "x": 1,
@@ -200,7 +242,7 @@
             "position": {
               "x": 16,
               "y": 0,
-              "z": 1.75
+              "z": 2.25
             },
             "scale": {
               "x": 32,
@@ -233,6 +275,90 @@
               "y": 0.017400000244379044,
               "z": -0.00139999995008111,
               "w": 0.9959999918937683
+            },
+            "parent": 0
+          }
+        },
+        "523": {
+          "json": {
+            "position": {
+              "x": 19,
+              "y": 0,
+              "z": 23.5
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "524": {
+          "json": {
+            "position": {
+              "x": 28.75,
+              "y": 0,
+              "z": 26.75
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "525": {
+          "json": {
+            "position": {
+              "x": 14.25,
+              "y": 0,
+              "z": 27
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "526": {
+          "json": {
+            "position": {
+              "x": 23.75,
+              "y": 0,
+              "z": 27.75
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
             },
             "parent": 0
           }
@@ -273,6 +399,12 @@
         "protocolBuffer": "PBMaterial"
       },
       "data": {
+        "516": {
+          "json": {}
+        },
+        "517": {
+          "json": {}
+        },
         "518": {
           "json": {}
         },
@@ -286,6 +418,18 @@
           "json": {}
         },
         "522": {
+          "json": {}
+        },
+        "523": {
+          "json": {}
+        },
+        "524": {
+          "json": {}
+        },
+        "525": {
+          "json": {}
+        },
+        "526": {
           "json": {}
         }
       }
@@ -299,7 +443,7 @@
         "protocolBuffer": "PBMeshCollider"
       },
       "data": {
-        "518": {
+        "516": {
           "json": {
             "collisionMask": 3,
             "mesh": {
@@ -308,7 +452,16 @@
             }
           }
         },
-        "519": {
+        "517": {
+          "json": {
+            "collisionMask": 3,
+            "mesh": {
+              "$case": "box",
+              "box": {}
+            }
+          }
+        },
+        "518": {
           "json": {
             "collisionMask": 3,
             "mesh": {
@@ -336,6 +489,42 @@
           }
         },
         "522": {
+          "json": {
+            "collisionMask": 3,
+            "mesh": {
+              "$case": "box",
+              "box": {}
+            }
+          }
+        },
+        "523": {
+          "json": {
+            "collisionMask": 3,
+            "mesh": {
+              "$case": "box",
+              "box": {}
+            }
+          }
+        },
+        "524": {
+          "json": {
+            "collisionMask": 3,
+            "mesh": {
+              "$case": "box",
+              "box": {}
+            }
+          }
+        },
+        "525": {
+          "json": {
+            "collisionMask": 3,
+            "mesh": {
+              "$case": "box",
+              "box": {}
+            }
+          }
+        },
+        "526": {
           "json": {
             "collisionMask": 3,
             "mesh": {
@@ -355,6 +544,26 @@
         "protocolBuffer": "PBMeshRenderer"
       },
       "data": {
+        "516": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "517": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
         "518": {
           "json": {
             "mesh": {
@@ -396,6 +605,46 @@
           }
         },
         "522": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "523": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "524": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "525": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "526": {
           "json": {
             "mesh": {
               "$case": "box",
@@ -430,6 +679,16 @@
             "value": "cornwall.glb"
           }
         },
+        "516": {
+          "json": {
+            "value": "Cube_4"
+          }
+        },
+        "517": {
+          "json": {
+            "value": "Cube_5"
+          }
+        },
         "518": {
           "json": {
             "value": "Cube"
@@ -453,6 +712,42 @@
         "522": {
           "json": {
             "value": "Cube_2_4"
+          }
+        },
+        "523": {
+          "json": {
+            "value": "Cube_6"
+          }
+        },
+        "524": {
+          "json": {
+            "value": "Cube_7"
+          }
+        },
+        "525": {
+          "json": {
+            "value": "Cube_8"
+          }
+        },
+        "526": {
+          "json": {
+            "value": "Cube_9"
+          }
+        }
+      }
+    },
+    {
+      "name": "core::VisibilityComponent",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {},
+        "serializationType": "protocol-buffer",
+        "protocolBuffer": "PBVisibilityComponent"
+      },
+      "data": {
+        "519": {
+          "json": {
+            "visible": true
           }
         }
       }
@@ -484,7 +779,22 @@
               "Light",
               "spotlightlook",
               "playerwall",
-              "playerspawn"
+              "playerspawn",
+              "zombiespawn"
+            ]
+          }
+        },
+        "516": {
+          "json": {
+            "tags": [
+              "zombiespawn"
+            ]
+          }
+        },
+        "517": {
+          "json": {
+            "tags": [
+              "zombiespawn"
             ]
           }
         },
@@ -522,6 +832,34 @@
               "spotlightlook"
             ]
           }
+        },
+        "523": {
+          "json": {
+            "tags": [
+              "zombiespawn"
+            ]
+          }
+        },
+        "524": {
+          "json": {
+            "tags": [
+              "zombiespawn"
+            ]
+          }
+        },
+        "525": {
+          "json": {
+            "tags": [
+              "zombiespawn"
+            ]
+          }
+        },
+        "526": {
+          "json": {
+            "tags": [
+              "zombiespawn"
+            ]
+          }
         }
       }
     },
@@ -538,7 +876,7 @@
         "serializationType": "map"
       },
       "data": {
-        "0": {
+        "517": {
           "json": {
             "gizmo": 0
           }
@@ -995,7 +1333,13 @@
                   519,
                   520,
                   521,
-                  522
+                  522,
+                  516,
+                  517,
+                  523,
+                  524,
+                  525,
+                  526
                 ]
               },
               {
@@ -1032,6 +1376,30 @@
               },
               {
                 "entity": 522,
+                "children": []
+              },
+              {
+                "entity": 516,
+                "children": []
+              },
+              {
+                "entity": 517,
+                "children": []
+              },
+              {
+                "entity": 523,
+                "children": []
+              },
+              {
+                "entity": 524,
+                "children": []
+              },
+              {
+                "entity": 525,
+                "children": []
+              },
+              {
+                "entity": 526,
                 "children": []
               }
             ]
@@ -1259,6 +1627,79 @@
       }
     },
     {
+      "name": "asset-packs::Actions",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "serializationType": "int32"
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "serializationType": "utf8-string"
+                },
+                "type": {
+                  "type": "string",
+                  "serializationType": "utf8-string"
+                },
+                "jsonPayload": {
+                  "type": "string",
+                  "serializationType": "utf8-string"
+                },
+                "allowedInBasicView": {
+                  "type": "boolean",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "boolean",
+                    "serializationType": "boolean"
+                  }
+                },
+                "basicViewId": {
+                  "type": "string",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "string",
+                    "serializationType": "utf8-string"
+                  }
+                },
+                "default": {
+                  "type": "boolean",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "boolean",
+                    "serializationType": "boolean"
+                  }
+                }
+              },
+              "serializationType": "map"
+            },
+            "serializationType": "array"
+          }
+        },
+        "serializationType": "map"
+      },
+      "data": {
+        "519": {
+          "json": {
+            "id": 1,
+            "value": [
+              {
+                "name": "hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
       "name": "asset-packs::Counter",
       "jsonSchema": {
         "type": "object",
@@ -1278,7 +1719,196 @@
         "0": {
           "json": {
             "id": 0,
-            "value": 0
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "asset-packs::Triggers",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "on_click",
+                    "on_input_action",
+                    "on_state_change",
+                    "on_spawn",
+                    "on_tween_end",
+                    "on_counter_change",
+                    "on_player_enters_area",
+                    "on_player_leaves_area",
+                    "on_delay",
+                    "on_loop",
+                    "on_clone",
+                    "on_click_image",
+                    "on_damage",
+                    "on_global_click",
+                    "on_global_primary",
+                    "on_global_secondary",
+                    "on_tick",
+                    "on_heal_player",
+                    "on_player_spawn"
+                  ],
+                  "default": "on_input_action",
+                  "serializationType": "enum-string",
+                  "enumObject": {
+                    "ON_CLICK": "on_click",
+                    "ON_INPUT_ACTION": "on_input_action",
+                    "ON_STATE_CHANGE": "on_state_change",
+                    "ON_SPAWN": "on_spawn",
+                    "ON_TWEEN_END": "on_tween_end",
+                    "ON_COUNTER_CHANGE": "on_counter_change",
+                    "ON_PLAYER_ENTERS_AREA": "on_player_enters_area",
+                    "ON_PLAYER_LEAVES_AREA": "on_player_leaves_area",
+                    "ON_DELAY": "on_delay",
+                    "ON_LOOP": "on_loop",
+                    "ON_CLONE": "on_clone",
+                    "ON_CLICK_IMAGE": "on_click_image",
+                    "ON_DAMAGE": "on_damage",
+                    "ON_GLOBAL_CLICK": "on_global_click",
+                    "ON_GLOBAL_PRIMARY": "on_global_primary",
+                    "ON_GLOBAL_SECONDARY": "on_global_secondary",
+                    "ON_TICK": "on_tick",
+                    "ON_HEAL_PLAYER": "on_heal_player",
+                    "ON_PLAYER_SPAWN": "on_player_spawn"
+                  }
+                },
+                "conditions": {
+                  "type": "array",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "serializationType": "optional",
+                          "optionalJsonSchema": {
+                            "type": "integer",
+                            "serializationType": "int32"
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "when_state_is",
+                            "when_state_is_not",
+                            "when_counter_equals",
+                            "when_counter_is_greater_than",
+                            "when_counter_is_less_than",
+                            "when_distance_to_player_less_than",
+                            "when_distance_to_player_greater_than",
+                            "when_previous_state_is",
+                            "when_previous_state_is_not"
+                          ],
+                          "default": "when_state_is",
+                          "serializationType": "enum-string",
+                          "enumObject": {
+                            "WHEN_STATE_IS": "when_state_is",
+                            "WHEN_STATE_IS_NOT": "when_state_is_not",
+                            "WHEN_COUNTER_EQUALS": "when_counter_equals",
+                            "WHEN_COUNTER_IS_GREATER_THAN": "when_counter_is_greater_than",
+                            "WHEN_COUNTER_IS_LESS_THAN": "when_counter_is_less_than",
+                            "WHEN_DISTANCE_TO_PLAYER_LESS_THAN": "when_distance_to_player_less_than",
+                            "WHEN_DISTANCE_TO_PLAYER_GREATER_THAN": "when_distance_to_player_greater_than",
+                            "WHEN_PREVIOUS_STATE_IS": "when_previous_state_is",
+                            "WHEN_PREVIOUS_STATE_IS_NOT": "when_previous_state_is_not"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "serializationType": "utf8-string"
+                        }
+                      },
+                      "serializationType": "map"
+                    },
+                    "serializationType": "array"
+                  }
+                },
+                "operation": {
+                  "type": "string",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "string",
+                    "enum": [
+                      "and",
+                      "or"
+                    ],
+                    "default": "and",
+                    "serializationType": "enum-string",
+                    "enumObject": {
+                      "AND": "and",
+                      "OR": "or"
+                    }
+                  }
+                },
+                "actions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "serializationType": "optional",
+                        "optionalJsonSchema": {
+                          "type": "integer",
+                          "serializationType": "int32"
+                        }
+                      },
+                      "name": {
+                        "type": "string",
+                        "serializationType": "optional",
+                        "optionalJsonSchema": {
+                          "type": "string",
+                          "serializationType": "utf8-string"
+                        }
+                      }
+                    },
+                    "serializationType": "map"
+                  },
+                  "serializationType": "array"
+                },
+                "basicViewId": {
+                  "type": "string",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "string",
+                    "serializationType": "utf8-string"
+                  }
+                }
+              },
+              "serializationType": "map"
+            },
+            "serializationType": "array"
+          }
+        },
+        "serializationType": "map"
+      },
+      "data": {
+        "519": {
+          "json": {
+            "value": [
+              {
+                "type": "on_spawn",
+                "conditions": [],
+                "operation": "and",
+                "actions": [
+                  {
+                    "id": 1,
+                    "name": "hide"
+                  }
+                ]
+              }
+            ]
           }
         }
       }
@@ -1309,6 +1939,12 @@
         "514": {
           "json": {}
         },
+        "516": {
+          "json": {}
+        },
+        "517": {
+          "json": {}
+        },
         "518": {
           "json": {}
         },
@@ -1322,6 +1958,18 @@
           "json": {}
         },
         "522": {
+          "json": {}
+        },
+        "523": {
+          "json": {}
+        },
+        "524": {
+          "json": {}
+        },
+        "525": {
+          "json": {}
+        },
+        "526": {
           "json": {}
         }
       }
