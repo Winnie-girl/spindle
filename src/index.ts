@@ -102,10 +102,16 @@ function spawnZombie() {
   // Create zombie entity
   const zombie = engine.addEntity()
   
+  // Calculate rotation to face the wall at z=8
+  const wallZ = 8
+  const deltaZ = wallZ - spawnPosition.z
+  const deltaX = 24 - spawnPosition.x // Wall is at x=24
+  const angle = Math.atan2(deltaX, deltaZ)
+  
   // Position the zombie 1 unit above the spawn point
   Transform.create(zombie, {
     position: Vector3.create(spawnPosition.x, spawnPosition.y + 1, spawnPosition.z),
-    rotation: Quaternion.create(0, 0, 0, 1),
+    rotation: Quaternion.fromEulerDegrees(0, angle * 180 / Math.PI, 0), // Face the wall
     scale: Vector3.create(1, 1, 1)
   })
   
