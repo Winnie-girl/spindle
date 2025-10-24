@@ -181,16 +181,16 @@
               "y": 9.25,
               "z": 9.75
             },
+            "scale": {
+              "x": 2,
+              "y": 1,
+              "z": 2
+            },
             "rotation": {
               "x": 0.08720000088214874,
               "y": 0.017400000244379044,
               "z": -0.00139999995008111,
               "w": 0.9959999918937683
-            },
-            "scale": {
-              "x": 2,
-              "y": 1,
-              "z": 2
             },
             "parent": 0
           }
@@ -844,9 +844,9 @@
         "serializationType": "map"
       },
       "data": {
-        "519": {
+        "0": {
           "json": {
-            "gizmo": 1
+            "gizmo": 0
           }
         }
       }
@@ -1931,26 +1931,6 @@
         },
         "526": {
           "json": {}
-        }
-      }
-    },
-    {
-      "name": "inspector::Lock",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "boolean",
-            "serializationType": "boolean"
-          }
-        },
-        "serializationType": "map"
-      },
-      "data": {
-        "518": {
-          "json": {
-            "value": true
-          }
         }
       }
     }

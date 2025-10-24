@@ -16,6 +16,5 @@ export enum EntityNames {
   Cube_7 = "Cube_7",
   Cube_8 = "Cube_8",
   Cube_9 = "Cube_9",
-  Large_Stone_Wall = "Large Stone Wall",
   girlzombie_glb = "girlzombie.glb",
 } 

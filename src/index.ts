@@ -1,4 +1,4 @@
-import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer } from '@dcl/sdk/ecs'
+import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, Input } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion, Color3 } from '@dcl/sdk/math'
 import { movePlayerTo } from '~system/RestrictedActions'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
@@ -120,10 +120,30 @@ function spawnZombie() {
     src: 'assets/scene/Models/girlzombie/girlzombie.glb'
   })
   
-  // Make sure the zombie is visible
+  // Make zombies visible
   VisibilityComponent.create(zombie, {
     visible: true
   })
+  
+  // Add MeshCollider so the zombie can be clicked
+  MeshCollider.create(zombie, {
+    mesh: { $case: 'box', box: {} }
+  })
+  
+  // Add pointer events to make zombie shootable
+  // PointerEvents.create(zombie, {
+  //   pointerEvents: [
+  //     {
+  //       eventType: PointerEventType.PET_DOWN,
+  //       eventInfo: {
+  //         button: InputAction.IA_POINTER,
+  //         hoverText: "Shoot Zombie",
+  //         showFeedback: true,
+  //         maxDistance: 100
+  //       }
+  //     }
+  //   ]
+  // })
   
   zombiesSpawned++
   zombiesSpawnedThisWave++
@@ -141,6 +161,9 @@ function startZombieWave() {
   if (zombieSpawnPoints.length > 0) {
     spawnZombie()
   }
+  
+  // Reset timer after spawning first zombie so next zombie spawns after interval
+  zombieSpawnTimer = 0
 }
 
 function endZombieWave() {
@@ -211,6 +234,42 @@ function updateZombieMovement() {
     if (transform.position.z <= 8) { // Wall at z=8
       engine.removeEntity(zombie)
       score = Math.max(0, score - 20)
+    }
+  }
+}
+
+function handleZombieShooting() {
+  // Check for input actions (mouse clicks)
+  if (Input.getInputAction(InputAction.IA_PRIMARY)) {
+    // Get all zombies
+    const zombieEntities = engine.getEntitiesWith(GltfContainer, Transform)
+    
+    // Find the closest zombie to the player
+    let closestZombie: Entity | null = null
+    let closestDistance = Infinity
+    
+    for (const [zombie] of zombieEntities) {
+      const zombieTransform = Transform.get(zombie)
+      const zombiePosition = zombieTransform.position
+      
+      // Simple distance calculation (you could make this more sophisticated)
+      const distance = Math.sqrt(
+        Math.pow(zombiePosition.x - 24.25, 2) + // Player position approximation
+        Math.pow(zombiePosition.y - 8, 2) +
+        Math.pow(zombiePosition.z - 6.75, 2)
+      )
+      
+      if (distance < closestDistance && distance <= 100) { // Max shooting distance
+        closestDistance = distance
+        closestZombie = zombie
+      }
+    }
+    
+    // Shoot the closest zombie
+    if (closestZombie) {
+      engine.removeEntity(closestZombie)
+      score += 10 // Add 10 points for shooting a zombie
+      console.log(`Zombie shot! Score: ${score}`)
     }
   }
 }
@@ -341,6 +400,7 @@ function setupScene() {
 engine.addSystem(updateGameTimer)
 engine.addSystem(updateZombieSpawning)
 engine.addSystem(updateZombieMovement)
+engine.addSystem(handleZombieShooting)
 
 export function main() {
   console.log('Scene initialized with HUD')
