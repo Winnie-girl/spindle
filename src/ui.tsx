@@ -24,7 +24,7 @@ export const ui = () => {
           width: 200,
           height: 60,
           positionType: 'absolute',
-          position: { top: 20, left: 400 }
+          position: { top: 20, left: 250 }
         }}
         uiText={{
           value: `Wave: ${gameState.currentWave}`,
@@ -56,7 +56,7 @@ export const ui = () => {
           width: 200,
           height: 60,
           positionType: 'absolute',
-          position: { top: 20, right: 400 }
+          position: { top: 20, right: 250 }
         }}
         uiText={{
           value: `Score: ${gameState.score}`,

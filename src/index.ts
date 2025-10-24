@@ -1,4 +1,4 @@
-import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, Input } from '@dcl/sdk/ecs'
+import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, inputSystem } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion, Color3 } from '@dcl/sdk/math'
 import { movePlayerTo } from '~system/RestrictedActions'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
@@ -239,8 +239,8 @@ function updateZombieMovement() {
 }
 
 function handleZombieShooting() {
-  // Check for input actions (mouse clicks)
-  if (Input.getInputAction(InputAction.IA_PRIMARY)) {
+  // Check for input actions (mouse clicks) - only on initial press
+  if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN)) {
     // Get all zombies
     const zombieEntities = engine.getEntitiesWith(GltfContainer, Transform)
     
@@ -252,7 +252,7 @@ function handleZombieShooting() {
       const zombieTransform = Transform.get(zombie)
       const zombiePosition = zombieTransform.position
       
-      // Simple distance calculation (you could make this more sophisticated)
+      // Simple distance calculation
       const distance = Math.sqrt(
         Math.pow(zombiePosition.x - 24.25, 2) + // Player position approximation
         Math.pow(zombiePosition.y - 8, 2) +
