@@ -186,6 +186,11 @@ function updateGameTimer() {
 
 // Zombie spawning system update
 function updateZombieSpawning() {
+  // Don't run if game hasn't started
+  if (!gameStarted) {
+    return
+  }
+  
   if (zombieSpawnPoints.length === 0) {
     return
   }
@@ -218,6 +223,11 @@ function updateZombieSpawning() {
 }
 
 function updateZombieMovement() {
+  // Don't run if game hasn't started
+  if (!gameStarted) {
+    return
+  }
+  
   const zombieEntities = engine.getEntitiesWith(GltfContainer, Transform)
   
   for (const [zombie] of zombieEntities) {
@@ -239,6 +249,11 @@ function updateZombieMovement() {
 }
 
 function handleZombieShooting() {
+  // Don't run if game hasn't started
+  if (!gameStarted) {
+    return
+  }
+  
   // Check for input actions (mouse clicks) - only on initial press
   if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN)) {
     // Get all zombies
@@ -403,11 +418,10 @@ engine.addSystem(updateZombieMovement)
 engine.addSystem(handleZombieShooting)
 
 export function main() {
-  console.log('Scene initialized with HUD')
+  console.log('Scene initialized - waiting for user to click START')
   
-  // Initialize UI
+  // Initialize UI (will show start menu since gameStarted is false)
   ReactEcsRenderer.setUiRenderer(ui)
   
-  // Start the game directly
-  startGame()
+  // Don't start the game automatically - wait for user to click START button
 }

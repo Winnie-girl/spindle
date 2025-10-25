@@ -8,7 +8,63 @@ import { getGameState } from './index'
 export const ui = () => {
   const gameState = getGameState()
   
-  // Simple Game HUD - no start menu
+  // If game hasn't started, show start menu
+  if (!gameState.gameStarted) {
+    return (
+      <UiEntity
+        uiTransform={{
+          width: '100%',
+          height: '100%',
+          positionType: 'absolute',
+          position: { top: 0, left: 0 }
+        }}
+      >
+        {/* Fullscreen Background Image */}
+        <UiEntity
+          uiTransform={{
+            width: '100%',
+            height: '100%',
+            positionType: 'absolute',
+            position: { top: 0, left: 0 }
+          }}
+          uiBackground={{
+            textureMode: 'nine-slices',
+            texture: {
+              src: 'assets/images/startgamepic.jpg'
+            },
+            uvs: [0, 1, 1, 1, 1, 0, 0, 0]
+          }}
+        />
+        
+        {/* START GAME Button - Centered */}
+        <UiEntity
+          uiTransform={{
+            width: 300,
+            height: 80,
+            positionType: 'absolute',
+            position: { top: '50%', left: '50%' },
+            margin: { top: -40, left: -150 }
+          }}
+          uiBackground={{
+            color: Color4.create(0.2, 0.8, 0.2, 0.9)
+          }}
+          onMouseDown={() => {
+            if ((globalThis as any).startGame) {
+              (globalThis as any).startGame()
+            }
+          }}
+          uiText={{
+            value: 'START GAME',
+            fontSize: 36,
+            color: Color4.White(),
+            textAlign: 'middle-center'
+          }}
+        />
+      </UiEntity>
+    )
+  }
+  
+  // If game has started, show the HUD
   return (
     <UiEntity
       uiTransform={{
