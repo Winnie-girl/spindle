@@ -4,6 +4,9 @@ import { movePlayerTo } from '~system/RestrictedActions'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
 import { ui } from './ui'
 
+// Define a component to tag zombies
+const ZombieComponent = engine.defineComponent('zombie-component', {})
+
 // Game state
 let gameStarted = false
 let currentWave = 1
@@ -102,6 +105,9 @@ function spawnZombie() {
   // Create zombie entity
   const zombie = engine.addEntity()
   
+  // Tag the zombie with a component so only zombies move, not floor entities
+  ZombieComponent.create(zombie, {})
+  
   // Calculate rotation to face the wall at z=8
   const wallZ = 8
   const deltaZ = wallZ - spawnPosition.z
@@ -154,6 +160,11 @@ function startZombieWave() {
   zombiesSpawnedThisWave = 0
   zombieSpawnTimer = 0
   zombieWaveActive = true
+  
+  // Reset countdown timer to 60 for each new wave (starting from wave 2)
+  if (currentWave > 1) {
+    countdownTime = 60
+  }
   
   console.log(`Starting wave ${currentWave} with ${getZombiesPerWave(currentWave)} zombies`)
   
@@ -216,10 +227,8 @@ function updateZombieSpawning() {
     zombieSpawnTimer = 0
   }
   
-  // End wave when all zombies are spawned
-  if (zombiesSpawnedThisWave >= zombiesPerWave) {
-    endZombieWave()
-  }
+  // Don't end the wave when all zombies are spawned - wait for them to be defeated
+  // Wave will end in updateZombieMovement when all zombies are defeated
 }
 
 function updateZombieMovement() {
@@ -228,9 +237,11 @@ function updateZombieMovement() {
     return
   }
   
-  const zombieEntities = engine.getEntitiesWith(GltfContainer, Transform)
+  const zombieEntities = engine.getEntitiesWith(ZombieComponent, Transform)
   
+  let zombieCount = 0
   for (const [zombie] of zombieEntities) {
+    zombieCount++
     const transform = Transform.getMutable(zombie)
     const position = transform.position
     
@@ -246,6 +257,13 @@ function updateZombieMovement() {
       score = Math.max(0, score - 20)
     }
   }
+  
+  // Check if wave is complete (all zombies spawned AND all defeated)
+  const zombiesPerWave = getZombiesPerWave(currentWave)
+  if (zombiesSpawnedThisWave >= zombiesPerWave && zombieCount === 0) {
+    console.log(`Wave ${currentWave} complete! Starting next wave...`)
+    endZombieWave()
+  }
 }
 
 function handleZombieShooting() {
@@ -257,7 +275,7 @@ function handleZombieShooting() {
   // Check for input actions (mouse clicks) - only on initial press
   if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN)) {
     // Get all zombies
-    const zombieEntities = engine.getEntitiesWith(GltfContainer, Transform)
+    const zombieEntities = engine.getEntitiesWith(ZombieComponent, Transform)
     
     // Find the closest zombie to the player
     let closestZombie: Entity | null = null
@@ -297,6 +315,26 @@ function setupScene() {
   
   // Setup zombie spawn points first
   setupZombieSpawns()
+  
+  // Handle any existing zombies in the scene (like the girlzombie.glb entity)
+  const existingZombies = engine.getEntitiesWith(GltfContainer, Transform)
+  for (const [entity] of existingZombies) {
+    const gltfContainer = GltfContainer.get(entity)
+    // Check if this is a zombie model
+    if (gltfContainer.src.includes('girlzombie.glb') || gltfContainer.src.includes('zombie')) {
+      // Add the ZombieComponent so it moves
+      if (!ZombieComponent.has(entity)) {
+        ZombieComponent.create(entity, {})
+        console.log('Added ZombieComponent to existing zombie in scene')
+      }
+      // Ensure the zombie is visible
+      if (VisibilityComponent.has(entity)) {
+        VisibilityComponent.getMutable(entity).visible = true
+      } else {
+        VisibilityComponent.create(entity, { visible: true })
+      }
+    }
+  }
   
   // Hide playerspawn entity and teleport player
   const playerSpawnEntities = engine.getEntitiesByTag('playerspawn')

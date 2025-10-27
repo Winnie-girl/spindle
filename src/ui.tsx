@@ -46,7 +46,7 @@ export const ui = () => {
             margin: { top: -40, left: -150 }
           }}
           uiBackground={{
-            color: Color4.create(0.2, 0.8, 0.2, 0.9)
+            color: Color4.create(0.4, 0.08, 0.08, 1.0) // Cherrywood #661414
           }}
           onMouseDown={() => {
             if ((globalThis as any).startGame) {
