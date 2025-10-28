@@ -608,6 +608,11 @@ function setupScene() {
     console.log('Added lurking behavior to cat')
   }
   
+  // Debug floor entities
+  const floorEntities = engine.getEntitiesByTag('floor')
+  const floorArray: Entity[] = Array.from(floorEntities)
+  console.log(`Found ${floorArray.length} floor entities`)
+  
   // Handle any existing zombies in the scene (like the girlzombie.glb entity)
   const existingZombies = engine.getEntitiesWith(GltfContainer, Transform)
   for (const [entity] of existingZombies) {
