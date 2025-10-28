@@ -1,5 +1,5 @@
-import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, inputSystem, Schemas } from '@dcl/sdk/ecs'
-import { Vector3, Quaternion, Color3 } from '@dcl/sdk/math'
+import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, inputSystem, Schemas, MeshRenderer, Material } from '@dcl/sdk/ecs'
+import { Vector3, Quaternion, Color3, Color4 } from '@dcl/sdk/math'
 import { movePlayerTo } from '~system/RestrictedActions'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
 import { ui } from './ui'
@@ -31,6 +31,14 @@ const CatComponentSchema = {
 }
 
 const CatComponent = engine.defineComponent('cat-component', CatComponentSchema)
+
+// Define a component for hit effect particles
+const HitEffectSchema = {
+  lifetime: Schemas.Number,
+  initialVelocity: Schemas.Vector3
+}
+
+const HitEffect = engine.defineComponent('hit-effect', HitEffectSchema)
 
 // Game state
 let gameStarted = false
@@ -295,6 +303,91 @@ function updateZombieMovement() {
   }
 }
 
+// Function to create hit effect at zombie position
+function createHitEffect(position: Vector3) {
+  // Create a brief flash of light
+  const flash = engine.addEntity()
+  Transform.create(flash, { position })
+  LightSource.create(flash, {
+    type: LightSource.Type.Point({}),
+    color: Color3.create(1, 0.5, 0), // Orange flash
+    intensity: 500,
+    range: 5
+  })
+  VisibilityComponent.create(flash, { visible: true })
+  
+  // Remove flash after 0.1 seconds (6 frames at 60fps)
+  HitEffect.create(flash, {
+    lifetime: 6,
+    initialVelocity: Vector3.create(0, 0, 0)
+  })
+  
+  // Create 5 particles that scatter
+  for (let i = 0; i < 5; i++) {
+    const particle = engine.addEntity()
+    
+    // Random offset from center
+    const randomOffset = Vector3.create(
+      (Math.random() - 0.5) * 0.3,
+      (Math.random() - 0.5) * 0.3,
+      (Math.random() - 0.5) * 0.3
+    )
+    
+    Transform.create(particle, {
+      position: Vector3.add(position, randomOffset),
+      scale: Vector3.create(0.1, 0.1, 0.1)
+    })
+    
+    // Create purple particle
+    MeshRenderer.setSphere(particle)
+    Material.setPbrMaterial(particle, {
+      albedoColor: Color4.create(Math.random() * 0.4 + 0.5, 0, Math.random() * 0.3 + 0.7, 1), // Purple colors
+      emissiveColor: Color4.create(0.7, 0.2, 1, 1), // Purple glow
+      emissiveIntensity: 2
+    })
+    
+    // Random velocity for scattering effect (increased scatter)
+    const velocity = Vector3.create(
+      (Math.random() - 0.5) * 0.15,  // Increased from 0.05 to 0.15
+      Math.random() * 0.15 + 0.02,  // Increased from 0.05 to 0.15
+      (Math.random() - 0.5) * 0.15  // Increased from 0.05 to 0.15
+    )
+    
+    // Particle will be cleaned up after 18 frames (0.3 seconds)
+    HitEffect.create(particle, {
+      lifetime: 18,
+      initialVelocity: velocity
+    })
+  }
+}
+
+// System to update and clean up hit effects
+function updateHitEffects() {
+  const hitEffects = engine.getEntitiesWith(HitEffect, Transform)
+  
+  for (const [effect] of hitEffects) {
+    const hitData = HitEffect.getMutable(effect)
+    const transform = Transform.getMutable(effect)
+    
+    // Decrease lifetime
+    hitData.lifetime--
+    
+    // Move particle
+    if (hitData.initialVelocity.x !== 0 || hitData.initialVelocity.y !== 0 || hitData.initialVelocity.z !== 0) {
+      transform.position = Vector3.add(transform.position, hitData.initialVelocity)
+      
+      // Fade out over time by scaling down
+      const scale = hitData.lifetime / 18
+      transform.scale = Vector3.create(scale * 0.1, scale * 0.1, scale * 0.1)
+    }
+    
+    // Remove effect when lifetime expires
+    if (hitData.lifetime <= 0) {
+      engine.removeEntity(effect)
+    }
+  }
+}
+
 function handleZombieShooting() {
   // Don't run if game hasn't started
   if (!gameStarted) {
@@ -329,6 +422,12 @@ function handleZombieShooting() {
     
     // Shoot the closest zombie
     if (closestZombie) {
+      const zombieTransform = Transform.get(closestZombie)
+      const zombiePos = zombieTransform.position
+      
+      // Create hit effect
+      createHitEffect(Vector3.create(zombiePos.x, zombiePos.y, zombiePos.z))
+      
       engine.removeEntity(closestZombie)
       score += 10 // Add 10 points for shooting a zombie
       console.log(`Zombie shot! Score: ${score}`)
@@ -649,6 +748,7 @@ engine.addSystem(updateZombieMovement)
 engine.addSystem(handleZombieShooting)
 engine.addSystem(updateMothFlying) // Add moth flying system
 engine.addSystem(updateCatMovement) // Add cat lurking system
+engine.addSystem(updateHitEffects) // Add hit effects cleanup system
 
 export function main() {
   console.log('Scene initialized - waiting for user to click START')
