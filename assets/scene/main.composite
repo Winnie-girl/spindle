@@ -97,37 +97,16 @@
               "y": 1.5499999523162842,
               "z": 17
             },
-            "rotation": {
-              "x": -0.03189999982714653,
-              "y": -0.9986000061035156,
-              "z": -0.01640000008046627,
-              "w": 0.039900001138448715
-            },
             "scale": {
               "x": 0.25,
               "y": 0.800000011920929,
               "z": 1
             },
-            "parent": 0
-          }
-        },
-        "515": {
-          "json": {
-            "position": {
-              "x": 15.596548080444336,
-              "y": 0,
-              "z": 3.526949644088745
-            },
             "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 16.5,
-              "y": 12,
-              "z": 19.5
+              "x": -0.03189999982714653,
+              "y": -0.9986000061035156,
+              "z": -0.01640000008046627,
+              "w": 0.039900001138448715
             },
             "parent": 0
           }
@@ -139,16 +118,16 @@
               "y": 0.75,
               "z": 26.979999542236328
             },
+            "scale": {
+              "x": 0.25,
+              "y": 0.800000011920929,
+              "z": 0.6000000238418579
+            },
             "rotation": {
               "x": -0.006500000134110451,
               "y": 0.21860000491142273,
               "z": -0.002400000113993883,
               "w": -0.9757999777793884
-            },
-            "scale": {
-              "x": 0.25,
-              "y": 0.800000011920929,
-              "z": 0.6000000238418579
             },
             "parent": 0
           }
@@ -160,16 +139,16 @@
               "y": 0.5,
               "z": 19.5
             },
+            "scale": {
+              "x": 0.25,
+              "y": 0.800000011920929,
+              "z": 0.6000000238418579
+            },
             "rotation": {
               "x": 0,
               "y": 0.13050000369548798,
               "z": 0,
               "w": -0.9914000034332275
-            },
-            "scale": {
-              "x": 0.25,
-              "y": 0.800000011920929,
-              "z": 0.6000000238418579
             },
             "parent": 0
           }
@@ -198,20 +177,20 @@
         "519": {
           "json": {
             "position": {
-              "x": 16,
-              "y": 11.5,
-              "z": 4.75
+              "x": 11,
+              "y": 13,
+              "z": 3
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1.7999999523162842
             },
             "rotation": {
               "x": 0.08720000088214874,
               "y": 0.017400000244379044,
               "z": -0.00139999995008111,
               "w": 0.9959999918937683
-            },
-            "scale": {
-              "x": 2,
-              "y": 1,
-              "z": 1.7999999523162842
             },
             "parent": 0
           }
@@ -220,7 +199,7 @@
           "json": {
             "position": {
               "x": 5.5,
-              "y": 8.25,
+              "y": 8.75,
               "z": 4.25
             },
             "scale": {
@@ -240,9 +219,14 @@
         "521": {
           "json": {
             "position": {
-              "x": 16.020000457763672,
+              "x": 16.049999237060547,
               "y": 1.25,
-              "z": 0.75
+              "z": 0.7799999713897705
+            },
+            "scale": {
+              "x": 31,
+              "y": 29,
+              "z": 1.2999999523162842
             },
             "rotation": {
               "x": 0,
@@ -250,19 +234,14 @@
               "z": 0,
               "w": 1
             },
-            "scale": {
-              "x": 31,
-              "y": 14,
-              "z": 1.2999999523162842
-            },
             "parent": 0
           }
         },
         "522": {
           "json": {
             "position": {
-              "x": 16,
-              "y": 9,
+              "x": 15.5,
+              "y": 8.5,
               "z": 24
             },
             "scale": {
@@ -286,16 +265,16 @@
               "y": 0.5,
               "z": 12.25
             },
+            "scale": {
+              "x": 0.25,
+              "y": 0.800000011920929,
+              "z": 0.6000000238418579
+            },
             "rotation": {
               "x": 0,
               "y": 0.13050000369548798,
               "z": 0,
               "w": 0.9914000034332275
-            },
-            "scale": {
-              "x": 0.25,
-              "y": 0.800000011920929,
-              "z": 0.6000000238418579
             },
             "parent": 0
           }
@@ -307,16 +286,16 @@
               "y": 0.75,
               "z": 25.5
             },
+            "scale": {
+              "x": 0.25,
+              "y": 0.800000011920929,
+              "z": 0.6000000238418579
+            },
             "rotation": {
               "x": 0,
               "y": 0.13050000369548798,
               "z": 0,
               "w": 0.9914000034332275
-            },
-            "scale": {
-              "x": 0.25,
-              "y": 0.800000011920929,
-              "z": 0.6000000238418579
             },
             "parent": 0
           }
@@ -328,16 +307,16 @@
               "y": 0.75,
               "z": 18.5
             },
+            "scale": {
+              "x": 0.25,
+              "y": 0.800000011920929,
+              "z": 0.6000000238418579
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 0.25,
-              "y": 0.800000011920929,
-              "z": 0.6000000238418579
             },
             "parent": 0
           }
@@ -345,62 +324,20 @@
         "526": {
           "json": {
             "position": {
-              "x": 17.5,
+              "x": 21,
               "y": 1.25,
-              "z": 31.25
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0.13050000369548798,
-              "z": 0,
-              "w": 0.9914000034332275
+              "z": 25.5
             },
             "scale": {
               "x": 0.25,
               "y": 0.800000011920929,
               "z": -0.4000000059604645
             },
-            "parent": 0
-          }
-        },
-        "527": {
-          "json": {
-            "position": {
-              "x": 24.770000457763672,
-              "y": 0,
-              "z": 4.929999828338623
-            },
             "rotation": {
               "x": 0,
-              "y": 0.707099974155426,
+              "y": 0.13050000369548798,
               "z": 0,
-              "w": 0.707099974155426
-            },
-            "scale": {
-              "x": 3,
-              "y": 1.600000023841858,
-              "z": 3
-            },
-            "parent": 0
-          }
-        },
-        "528": {
-          "json": {
-            "position": {
-              "x": 7.059999942779541,
-              "y": 0,
-              "z": 4.929999828338623
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0.707099974155426,
-              "z": 0,
-              "w": -0.707099974155426
-            },
-            "scale": {
-              "x": 3,
-              "y": 1.600000023841858,
-              "z": 3
+              "w": 0.9914000034332275
             },
             "parent": 0
           }
@@ -412,16 +349,16 @@
               "y": 0,
               "z": 1.4900000095367432
             },
+            "scale": {
+              "x": 3,
+              "y": 1.600000023841858,
+              "z": 9.699999809265137
+            },
             "rotation": {
               "x": 0,
               "y": 1,
               "z": 0,
               "w": 0
-            },
-            "scale": {
-              "x": 3,
-              "y": 1.600000023841858,
-              "z": 9.699999809265137
             },
             "parent": 0
           }
@@ -433,16 +370,58 @@
               "y": 0,
               "z": 1.690000057220459
             },
+            "scale": {
+              "x": 3,
+              "y": 1.600000023841858,
+              "z": 9.699999809265137
+            },
             "rotation": {
               "x": 0,
               "y": 1,
               "z": 0,
               "w": 0
             },
+            "parent": 0
+          }
+        },
+        "531": {
+          "json": {
+            "position": {
+              "x": 16,
+              "y": 7,
+              "z": 29.5
+            },
             "scale": {
-              "x": 3,
-              "y": 1.600000023841858,
-              "z": 9.699999809265137
+              "x": 32.79999923706055,
+              "y": 1,
+              "z": 11
+            },
+            "rotation": {
+              "x": 0.7041000127792358,
+              "y": 0,
+              "z": 0,
+              "w": 0.710099995136261
+            },
+            "parent": 0
+          }
+        },
+        "532": {
+          "json": {
+            "position": {
+              "x": 15.939998626708984,
+              "y": 12.25,
+              "z": 17.959999084472656
+            },
+            "scale": {
+              "x": 32.20000076293945,
+              "y": 1,
+              "z": 24
+            },
+            "rotation": {
+              "x": 1.000004529953003,
+              "y": 0,
+              "z": 0,
+              "w": 0.0042092204093933105
             },
             "parent": 0
           }
@@ -454,16 +433,16 @@
               "y": 0,
               "z": 30.75
             },
+            "scale": {
+              "x": 5,
+              "y": 3,
+              "z": 7.75
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 5,
-              "y": 3,
-              "z": 7.75
             },
             "parent": 0
           }
@@ -475,16 +454,37 @@
               "y": 0,
               "z": 30.75
             },
+            "scale": {
+              "x": 5,
+              "y": 3,
+              "z": 7.75
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
             },
+            "parent": 0
+          }
+        },
+        "536": {
+          "json": {
+            "position": {
+              "x": 31.37999725341797,
+              "y": 7,
+              "z": 15.969999313354492
+            },
             "scale": {
-              "x": 5,
-              "y": 3,
-              "z": 7.75
+              "x": 30.799999237060547,
+              "y": 1,
+              "z": 11
+            },
+            "rotation": {
+              "x": -0.5,
+              "y": 0.5,
+              "z": -0.5,
+              "w": -0.5
             },
             "parent": 0
           }
@@ -496,16 +496,16 @@
               "y": 3.5,
               "z": 30.5
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 0.5
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 0.5
             },
             "parent": 0
           }
@@ -517,16 +517,37 @@
               "y": 3.5,
               "z": 30.530000686645508
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 0.5
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
             },
+            "parent": 0
+          }
+        },
+        "539": {
+          "json": {
+            "position": {
+              "x": 0.7900000214576721,
+              "y": 7,
+              "z": 16.31999969482422
+            },
             "scale": {
-              "x": 1,
+              "x": 30.799999237060547,
               "y": 1,
-              "z": 0.5
+              "z": 11
+            },
+            "rotation": {
+              "x": -0.5,
+              "y": 0.5,
+              "z": -0.5,
+              "w": -0.5
             },
             "parent": 0
           }
@@ -538,16 +559,16 @@
               "y": 2.5,
               "z": 21
             },
+            "scale": {
+              "x": 3,
+              "y": 3,
+              "z": 2
+            },
             "rotation": {
               "x": -0.02729908563196659,
               "y": 0.8988286852836609,
               "z": -0.2229737639427185,
               "w": -0.3764786124229431
-            },
-            "scale": {
-              "x": 3,
-              "y": 3,
-              "z": 2
             },
             "parent": 0
           }
@@ -559,16 +580,16 @@
               "y": 2.5,
               "z": 11.265778541564941
             },
+            "scale": {
+              "x": 3,
+              "y": 3,
+              "z": 2
+            },
             "rotation": {
               "x": -0.02729908749461174,
               "y": 0.8988286852836609,
               "z": -0.2229737639427185,
               "w": -0.3764786124229431
-            },
-            "scale": {
-              "x": 3,
-              "y": 3,
-              "z": 2
             },
             "parent": 0
           }
@@ -580,16 +601,16 @@
               "y": 2.5,
               "z": 21.25670051574707
             },
+            "scale": {
+              "x": 3,
+              "y": 3,
+              "z": 2
+            },
             "rotation": {
               "x": 0.07036019116640091,
               "y": 0.9315827488899231,
               "z": -0.12704871594905853,
               "w": 0.33339667320251465
-            },
-            "scale": {
-              "x": 3,
-              "y": 3,
-              "z": 2
             },
             "parent": 0
           }
@@ -601,352 +622,37 @@
               "y": 2.5,
               "z": 11.50670051574707
             },
+            "scale": {
+              "x": 3,
+              "y": 3,
+              "z": 2
+            },
             "rotation": {
               "x": 0.05317506566643715,
               "y": 0.9671299457550049,
               "z": -0.1351456493139267,
               "w": 0.20894846320152283
             },
-            "scale": {
-              "x": 3,
-              "y": 3,
-              "z": 2
-            },
             "parent": 0
           }
         },
-        "547": {
+        "545": {
           "json": {
             "position": {
-              "x": 31.5,
-              "y": 12.25,
-              "z": 30.25
-            },
-            "rotation": {
-              "x": 0.7041000127792358,
+              "x": 16,
               "y": 0,
-              "z": 0,
-              "w": -0.710099995136261
+              "z": 2.75
             },
             "scale": {
-              "x": 62,
-              "y": 60,
-              "z": 28
-            },
-            "parent": 0
-          }
-        },
-        "551": {
-          "json": {
-            "position": {
-              "x": 0.43797212839126587,
-              "y": 12.25,
-              "z": 0.7660598754882812
-            },
-            "rotation": {
-              "x": 1.1102230246251565e-16,
-              "y": 0.710099995136261,
-              "z": 0.7041000127792358,
-              "w": -9.71445146547012e-17
-            },
-            "scale": {
-              "x": 62,
-              "y": 60,
-              "z": 28
-            },
-            "parent": 0
-          }
-        },
-        "557": {
-          "json": {
-            "position": {
-              "x": 31.390926361083984,
-              "y": 6,
-              "z": 0.7115397453308105
+              "x": 30.200000762939453,
+              "y": 12.5,
+              "z": 4.5
             },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "558": {
-          "json": {
-            "position": {
-              "x": 26.729999542236328,
-              "y": 5,
-              "z": 17
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 7,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "559": {
-          "json": {
-            "position": {
-              "x": 4.98131799697876,
-              "y": 4.5,
-              "z": 10.250118255615234
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "560": {
-          "json": {
-            "position": {
-              "x": 10.729999542236328,
-              "y": 6.5,
-              "z": 14.75
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 12,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "561": {
-          "json": {
-            "position": {
-              "x": 7.480000019073486,
-              "y": 5,
-              "z": 19
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 16,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "562": {
-          "json": {
-            "position": {
-              "x": 31.390926361083984,
-              "y": 6,
-              "z": 0.7115397453308105
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "563": {
-          "json": {
-            "position": {
-              "x": 21.4813175201416,
-              "y": 5,
-              "z": 20.750118255615234
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "565": {
-          "json": {
-            "position": {
-              "x": 31.48131561279297,
-              "y": 5.75,
-              "z": 30.250118255615234
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "566": {
-          "json": {
-            "position": {
-              "x": 23.812728881835938,
-              "y": 5,
-              "z": 15.477481842041016
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "568": {
-          "json": {
-            "position": {
-              "x": 0.7313156127929688,
-              "y": 6,
-              "z": 30.250118255615234
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "569": {
-          "json": {
-            "position": {
-              "x": 31.2313175201416,
-              "y": 5,
-              "z": 18.750118255615234
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "570": {
-          "json": {
-            "position": {
-              "x": 0.7313156127929688,
-              "y": 5.5,
-              "z": 21.750118255615234
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "571": {
-          "json": {
-            "position": {
-              "x": 0.7313156127929688,
-              "y": 5.5,
-              "z": 11.750118255615234
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
-            },
-            "parent": 0
-          }
-        },
-        "572": {
-          "json": {
-            "position": {
-              "x": 0.7313156127929688,
-              "y": 5.75,
-              "z": 0.7501182556152344
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "scale": {
-              "x": 10,
-              "y": 18,
-              "z": 5
             },
             "parent": 0
           }
@@ -958,16 +664,16 @@
               "y": 0,
               "z": 32
             },
+            "scale": {
+              "x": 16,
+              "y": 1,
+              "z": 16
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 16,
-              "y": 1,
-              "z": 16
             },
             "parent": 0
           }
@@ -990,27 +696,6 @@
             "invisibleMeshesCollisionMask": 3
           }
         },
-        "515": {
-          "json": {
-            "src": "assets/scene/Models/skullwall/skullwall.glb",
-            "visibleMeshesCollisionMask": 2,
-            "invisibleMeshesCollisionMask": 0
-          }
-        },
-        "527": {
-          "json": {
-            "src": "assets/asset-packs/medium_iron_fence/FenceIronMedium_01/FenceIronMedium_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "528": {
-          "json": {
-            "src": "assets/asset-packs/medium_iron_fence/FenceIronMedium_01/FenceIronMedium_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
         "529": {
           "json": {
             "src": "assets/asset-packs/medium_iron_fence/FenceIronMedium_01/FenceIronMedium_01.glb",
@@ -1023,6 +708,20 @@
             "src": "assets/asset-packs/medium_iron_fence/FenceIronMedium_01/FenceIronMedium_01.glb",
             "visibleMeshesCollisionMask": 0,
             "invisibleMeshesCollisionMask": 3
+          }
+        },
+        "531": {
+          "json": {
+            "src": "assets/scene/Models/spiderweb/spiderweb.glb",
+            "visibleMeshesCollisionMask": 3,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "532": {
+          "json": {
+            "src": "assets/scene/Models/spiderweb/spiderweb.glb",
+            "visibleMeshesCollisionMask": 3,
+            "invisibleMeshesCollisionMask": 0
           }
         },
         "534": {
@@ -1039,17 +738,31 @@
             "invisibleMeshesCollisionMask": 3
           }
         },
+        "536": {
+          "json": {
+            "src": "assets/scene/Models/spiderweb/spiderweb.glb",
+            "visibleMeshesCollisionMask": 3,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
         "537": {
           "json": {
             "src": "assets/asset-packs/point_light/pointlight.glb",
-            "visibleMeshesCollisionMask": 0,
+            "visibleMeshesCollisionMask": 3,
             "invisibleMeshesCollisionMask": 0
           }
         },
         "538": {
           "json": {
             "src": "assets/asset-packs/point_light/pointlight.glb",
-            "visibleMeshesCollisionMask": 0,
+            "visibleMeshesCollisionMask": 3,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "539": {
+          "json": {
+            "src": "assets/scene/Models/spiderweb/spiderweb.glb",
+            "visibleMeshesCollisionMask": 3,
             "invisibleMeshesCollisionMask": 0
           }
         },
@@ -1081,116 +794,11 @@
             "invisibleMeshesCollisionMask": 3
           }
         },
-        "547": {
+        "545": {
           "json": {
-            "src": "assets/asset-packs/spider_net_01/HWN20_Spider_Net_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "551": {
-          "json": {
-            "src": "assets/asset-packs/spider_net_01/HWN20_Spider_Net_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "557": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "558": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "559": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "560": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "561": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "562": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "563": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "565": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "566": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "568": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "569": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "570": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "571": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "572": {
-          "json": {
-            "src": "assets/asset-packs/spider_01/HWN20_Spider_01.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
+            "src": "assets/scene/Models/skullwall/skullwall.glb",
+            "visibleMeshesCollisionMask": 3,
+            "invisibleMeshesCollisionMask": 0
           }
         },
         "573": {
@@ -1486,11 +1094,6 @@
             "value": "girlzombie.glb"
           }
         },
-        "515": {
-          "json": {
-            "value": "skullwall.glb"
-          }
-        },
         "516": {
           "json": {
             "value": "Cube_4"
@@ -1546,16 +1149,6 @@
             "value": "Cube_9"
           }
         },
-        "527": {
-          "json": {
-            "value": "Medium Iron Fence"
-          }
-        },
-        "528": {
-          "json": {
-            "value": "Medium Iron Fence_2"
-          }
-        },
         "529": {
           "json": {
             "value": "Medium Iron Fence_3"
@@ -1564,6 +1157,16 @@
         "530": {
           "json": {
             "value": "Medium Iron Fence_3_4"
+          }
+        },
+        "531": {
+          "json": {
+            "value": "spiderweb.glb"
+          }
+        },
+        "532": {
+          "json": {
+            "value": "spiderweb.glb_2"
           }
         },
         "534": {
@@ -1576,6 +1179,11 @@
             "value": "Iron Fence End Module_2"
           }
         },
+        "536": {
+          "json": {
+            "value": "spiderweb.glb_3"
+          }
+        },
         "537": {
           "json": {
             "value": "Point light"
@@ -1584,6 +1192,11 @@
         "538": {
           "json": {
             "value": "Point light_2"
+          }
+        },
+        "539": {
+          "json": {
+            "value": "spiderweb.glb_3_4"
           }
         },
         "540": {
@@ -1606,84 +1219,9 @@
             "value": "Skull 02_3_4"
           }
         },
-        "547": {
+        "545": {
           "json": {
-            "value": "Spider Net 01"
-          }
-        },
-        "551": {
-          "json": {
-            "value": "Spider Net 01_2"
-          }
-        },
-        "557": {
-          "json": {
-            "value": "Spider 01"
-          }
-        },
-        "558": {
-          "json": {
-            "value": "Spider 01_2"
-          }
-        },
-        "559": {
-          "json": {
-            "value": "Spider 01_2_3"
-          }
-        },
-        "560": {
-          "json": {
-            "value": "Spider 01_2_3_4"
-          }
-        },
-        "561": {
-          "json": {
-            "value": "Spider 01_2_3_4_5"
-          }
-        },
-        "562": {
-          "json": {
-            "value": "Spider 01_3"
-          }
-        },
-        "563": {
-          "json": {
-            "value": "Spider 01_2_4"
-          }
-        },
-        "565": {
-          "json": {
-            "value": "Spider 01_2_5"
-          }
-        },
-        "566": {
-          "json": {
-            "value": "Spider 01_2_5_6"
-          }
-        },
-        "568": {
-          "json": {
-            "value": "Spider 01_2_5_7"
-          }
-        },
-        "569": {
-          "json": {
-            "value": "Spider 01_2_6"
-          }
-        },
-        "570": {
-          "json": {
-            "value": "Spider 01_2_5_7_8"
-          }
-        },
-        "571": {
-          "json": {
-            "value": "Spider 01_2_5_7_8_9"
-          }
-        },
-        "572": {
-          "json": {
-            "value": "Spider 01_2_5_7_8_9_10"
+            "value": "skullwall.glb"
           }
         },
         "573": {
@@ -1754,13 +1292,6 @@
               "Ironfence",
               "fenceend",
               "sidenet"
-            ]
-          }
-        },
-        "515": {
-          "json": {
-            "tags": [
-              "skullwall"
             ]
           }
         },
@@ -1841,20 +1372,6 @@
             ]
           }
         },
-        "527": {
-          "json": {
-            "tags": [
-              "Ironfence"
-            ]
-          }
-        },
-        "528": {
-          "json": {
-            "tags": [
-              "Ironfence"
-            ]
-          }
-        },
         "529": {
           "json": {
             "tags": [
@@ -1903,12 +1420,19 @@
       "data": {
         "537": {
           "json": {
+            "active": true,
             "color": {
               "r": 1,
               "g": 0.6470588445663452,
               "b": 0
             },
-            "intensity": 2831
+            "intensity": 431,
+            "range": -1,
+            "shadow": false,
+            "type": {
+              "$case": "point",
+              "point": {}
+            }
           }
         },
         "538": {
@@ -1936,9 +1460,9 @@
         "serializationType": "map"
       },
       "data": {
-        "515": {
+        "521": {
           "json": {
-            "gizmo": 1
+            "gizmo": 0
           }
         }
       }
@@ -2399,9 +1923,6 @@
                   524,
                   525,
                   526,
-                  515,
-                  527,
-                  528,
                   529,
                   530,
                   534,
@@ -2412,23 +1933,12 @@
                   541,
                   542,
                   543,
-                  547,
-                  551,
-                  557,
-                  558,
-                  559,
-                  560,
-                  561,
-                  562,
-                  563,
-                  565,
-                  566,
-                  568,
-                  569,
-                  570,
-                  571,
-                  572,
-                  573
+                  573,
+                  531,
+                  532,
+                  536,
+                  539,
+                  545
                 ]
               },
               {
@@ -2488,18 +1998,6 @@
                 "children": []
               },
               {
-                "entity": 515,
-                "children": []
-              },
-              {
-                "entity": 527,
-                "children": []
-              },
-              {
-                "entity": 528,
-                "children": []
-              },
-              {
                 "entity": 529,
                 "children": []
               },
@@ -2540,71 +2038,27 @@
                 "children": []
               },
               {
-                "entity": 547,
-                "children": []
-              },
-              {
-                "entity": 551,
-                "children": []
-              },
-              {
-                "entity": 557,
-                "children": []
-              },
-              {
-                "entity": 558,
-                "children": []
-              },
-              {
-                "entity": 559,
-                "children": []
-              },
-              {
-                "entity": 560,
-                "children": []
-              },
-              {
-                "entity": 561,
-                "children": []
-              },
-              {
-                "entity": 562,
-                "children": []
-              },
-              {
-                "entity": 563,
-                "children": []
-              },
-              {
-                "entity": 565,
-                "children": []
-              },
-              {
-                "entity": 566,
-                "children": []
-              },
-              {
-                "entity": 568,
-                "children": []
-              },
-              {
-                "entity": 569,
-                "children": []
-              },
-              {
-                "entity": 570,
-                "children": []
-              },
-              {
-                "entity": 571,
-                "children": []
-              },
-              {
-                "entity": 572,
-                "children": []
-              },
-              {
                 "entity": 573,
+                "children": []
+              },
+              {
+                "entity": 531,
+                "children": []
+              },
+              {
+                "entity": 532,
+                "children": []
+              },
+              {
+                "entity": 536,
+                "children": []
+              },
+              {
+                "entity": 539,
+                "children": []
+              },
+              {
+                "entity": 545,
                 "children": []
               }
             ]
@@ -3141,9 +2595,6 @@
         "514": {
           "json": {}
         },
-        "515": {
-          "json": {}
-        },
         "516": {
           "json": {}
         },
@@ -3177,16 +2628,16 @@
         "526": {
           "json": {}
         },
-        "527": {
-          "json": {}
-        },
-        "528": {
-          "json": {}
-        },
         "529": {
           "json": {}
         },
         "530": {
+          "json": {}
+        },
+        "531": {
+          "json": {}
+        },
+        "532": {
           "json": {}
         },
         "534": {
@@ -3195,10 +2646,16 @@
         "535": {
           "json": {}
         },
+        "536": {
+          "json": {}
+        },
         "537": {
           "json": {}
         },
         "538": {
+          "json": {}
+        },
+        "539": {
           "json": {}
         },
         "540": {
@@ -3213,7 +2670,7 @@
         "543": {
           "json": {}
         },
-        "547": {
+        "545": {
           "json": {}
         },
         "549": {
@@ -3222,55 +2679,10 @@
         "550": {
           "json": {}
         },
-        "551": {
-          "json": {}
-        },
         "553": {
           "json": {}
         },
-        "557": {
-          "json": {}
-        },
-        "558": {
-          "json": {}
-        },
-        "559": {
-          "json": {}
-        },
-        "560": {
-          "json": {}
-        },
-        "561": {
-          "json": {}
-        },
-        "562": {
-          "json": {}
-        },
-        "563": {
-          "json": {}
-        },
         "564": {
-          "json": {}
-        },
-        "565": {
-          "json": {}
-        },
-        "566": {
-          "json": {}
-        },
-        "568": {
-          "json": {}
-        },
-        "569": {
-          "json": {}
-        },
-        "570": {
-          "json": {}
-        },
-        "571": {
-          "json": {}
-        },
-        "572": {
           "json": {}
         },
         "573": {
