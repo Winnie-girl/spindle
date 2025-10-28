@@ -19,6 +19,19 @@ const MothComponentSchema = {
 
 const MothComponent = engine.defineComponent('moth-component', MothComponentSchema)
 
+// Define a component for cats with lurking properties
+const CatComponentSchema = {
+  moveSpeed: Schemas.Number,
+  patrolRadius: Schemas.Number,
+  startX: Schemas.Number,
+  startY: Schemas.Number,
+  startZ: Schemas.Number,
+  direction: Schemas.Number,
+  waitTimer: Schemas.Number
+}
+
+const CatComponent = engine.defineComponent('cat-component', CatComponentSchema)
+
 // Game state
 let gameStarted = false
 let currentWave = 1
@@ -35,6 +48,7 @@ let zombieWaveActive = false
 let gameTimer = 0
 let gameTimerInterval = 60 // 1 second at 60fps
 let mothAnimationTime = 0 // For smooth moth animation
+let catAnimationTime = 0 // For cat movement timing
 
 // Start game function
 function startGame() {
@@ -199,6 +213,7 @@ function endZombieWave() {
 function updateGameTimer() {
   gameTimer++
   mothAnimationTime++ // Increment moth animation time
+  catAnimationTime++ // Increment cat animation time
   
   // Update countdown every second
   if (gameTimer >= gameTimerInterval) {
@@ -373,6 +388,59 @@ function updateMothFlying() {
   }
 }
 
+// Cat lurking system
+function updateCatMovement() {
+  const catEntities = engine.getEntitiesWith(CatComponent, Transform)
+  
+  for (const [cat] of catEntities) {
+    const catData = CatComponent.getMutable(cat)
+    const transform = Transform.getMutable(cat)
+    
+    // Increment wait timer
+    catData.waitTimer++
+    
+    // Cat pauses for a bit, then moves (lurking behavior)
+    if (catData.waitTimer < 180) { // Wait 3 seconds before moving
+      // Just rotate slightly while waiting
+      const idleRotation = Math.sin(catAnimationTime * 0.01) * 5
+      transform.rotation = Quaternion.fromEulerDegrees(0, idleRotation, 0)
+      continue
+    }
+    
+    // Reset wait timer periodically
+    if (catData.waitTimer > 420) { // Wait again after 7 seconds of movement
+      catData.waitTimer = 0
+      catData.direction += Math.PI / 2 // Change direction 90 degrees
+    }
+    
+    // Move in the current direction
+    const newX = transform.position.x + Math.cos(catData.direction) * catData.moveSpeed
+    const newZ = transform.position.z + Math.sin(catData.direction) * catData.moveSpeed
+    
+    // Keep cat within patrol radius of starting position
+    const distFromStart = Math.sqrt(
+      Math.pow(newX - catData.startX, 2) + 
+      Math.pow(newZ - catData.startZ, 2)
+    )
+    
+    if (distFromStart > catData.patrolRadius) {
+      // Turn around if too far from start
+      catData.direction += Math.PI
+    } else {
+      // Update position
+      transform.position = Vector3.create(
+        newX,
+        catData.startY, // Keep Y at starting height
+        newZ
+      )
+    }
+    
+    // Rotate to face movement direction
+    const rotationAngle = (catData.direction * 180 / Math.PI) + 180
+    transform.rotation = Quaternion.fromEulerDegrees(0, rotationAngle, 0)
+  }
+}
+
 // Make startGame globally available
 (globalThis as any).startGame = startGame
 
@@ -409,6 +477,36 @@ function setupScene() {
     }
     
     console.log('Added flying behavior to moth')
+  }
+  
+  // Setup cats with lurking behavior
+  const catEntities = engine.getEntitiesByTag('cat')
+  const catArray: Entity[] = Array.from(catEntities)
+  
+  console.log(`Found ${catArray.length} cat entities`)
+  
+  for (const cat of catArray) {
+    const transform = Transform.get(cat)
+    
+    // Add the CatComponent with lurking properties
+    CatComponent.create(cat, {
+      moveSpeed: 0.003 + Math.random() * 0.002, // Very slow movement
+      patrolRadius: 5 + Math.random() * 3, // Roam up to 8 units from start
+      startX: transform.position.x,
+      startY: transform.position.y,
+      startZ: transform.position.z,
+      direction: Math.random() * Math.PI * 2, // Random starting direction
+      waitTimer: 0
+    })
+    
+    // Ensure cats are visible
+    if (VisibilityComponent.has(cat)) {
+      VisibilityComponent.getMutable(cat).visible = true
+    } else {
+      VisibilityComponent.create(cat, { visible: true })
+    }
+    
+    console.log('Added lurking behavior to cat')
   }
   
   // Handle any existing zombies in the scene (like the girlzombie.glb entity)
@@ -550,6 +648,7 @@ engine.addSystem(updateZombieSpawning)
 engine.addSystem(updateZombieMovement)
 engine.addSystem(handleZombieShooting)
 engine.addSystem(updateMothFlying) // Add moth flying system
+engine.addSystem(updateCatMovement) // Add cat lurking system
 
 export function main() {
   console.log('Scene initialized - waiting for user to click START')
