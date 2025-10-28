@@ -1,4 +1,4 @@
-import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, inputSystem } from '@dcl/sdk/ecs'
+import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, inputSystem, Schemas } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion, Color3 } from '@dcl/sdk/math'
 import { movePlayerTo } from '~system/RestrictedActions'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
@@ -6,6 +6,18 @@ import { ui } from './ui'
 
 // Define a component to tag zombies
 const ZombieComponent = engine.defineComponent('zombie-component', {})
+
+// Define a component for moths with flying properties
+const MothComponentSchema = {
+  flySpeed: Schemas.Number,
+  verticalSpeed: Schemas.Number,
+  horizontalOffset: Schemas.Number,
+  startX: Schemas.Number,
+  startY: Schemas.Number,
+  startZ: Schemas.Number
+}
+
+const MothComponent = engine.defineComponent('moth-component', MothComponentSchema)
 
 // Game state
 let gameStarted = false
@@ -22,6 +34,7 @@ let zombieSpawnInterval = 120 // 2 seconds at 60fps
 let zombieWaveActive = false
 let gameTimer = 0
 let gameTimerInterval = 60 // 1 second at 60fps
+let mothAnimationTime = 0 // For smooth moth animation
 
 // Start game function
 function startGame() {
@@ -185,6 +198,7 @@ function endZombieWave() {
 // Game timer system
 function updateGameTimer() {
   gameTimer++
+  mothAnimationTime++ // Increment moth animation time
   
   // Update countdown every second
   if (gameTimer >= gameTimerInterval) {
@@ -307,6 +321,58 @@ function handleZombieShooting() {
   }
 }
 
+// Moth flying system
+function updateMothFlying() {
+  const mothEntities = engine.getEntitiesWith(MothComponent, Transform)
+  
+  for (const [moth] of mothEntities) {
+    const transform = Transform.getMutable(moth)
+    const mothData = MothComponent.get(moth)
+    const position = transform.position
+    
+    // Vertical flying movement (bobbing up and down using sine wave)
+    const newY = mothData.startY + Math.sin(mothAnimationTime * 0.1) * mothData.verticalSpeed
+    
+    let newX: number, newZ: number
+    
+    // If horizontalOffset is 0, moth orbits in place. Otherwise, moth flies away
+    if (mothData.horizontalOffset === 0) {
+      // Orbiting behavior - moth stays in local area
+      const timeOffset = mothAnimationTime * mothData.flySpeed
+      const orbitRadius = 1.5 // Small orbiting radius
+      
+      // Circular horizontal movement (keeps moths in their local area)
+      newX = mothData.startX + Math.cos(timeOffset) * orbitRadius * mothData.flySpeed
+      newZ = mothData.startZ + Math.sin(timeOffset) * orbitRadius * mothData.flySpeed
+      
+      // Add rotation that follows the circular path
+      const rotationOffset = (timeOffset * 57.3) % 360 // Convert radians to degrees
+      transform.rotation = Quaternion.fromEulerDegrees(0, rotationOffset, 0)
+    } else {
+      // Flying away behavior - moth flies forward and gets cleaned up when far
+      newX = position.x
+      newZ = position.z - mothData.flySpeed
+      
+      // Add slight rotation for natural movement
+      const rotationOffset = Math.sin(mothAnimationTime * 0.05) * 15
+      transform.rotation = Quaternion.fromEulerDegrees(0, rotationOffset, 0)
+      
+      // Remove moths that fly too far (cleanup)
+      if (position.z < -20) {
+        engine.removeEntity(moth)
+        continue
+      }
+    }
+    
+    // Update position
+    transform.position = Vector3.create(
+      newX,
+      newY,
+      newZ
+    )
+  }
+}
+
 // Make startGame globally available
 (globalThis as any).startGame = startGame
 
@@ -315,6 +381,35 @@ function setupScene() {
   
   // Setup zombie spawn points first
   setupZombieSpawns()
+  
+  // Setup moths with flying behavior
+  const mothEntities = engine.getEntitiesByTag('moth')
+  const mothArray: Entity[] = Array.from(mothEntities)
+  
+  console.log(`Found ${mothArray.length} moth entities`)
+  
+  for (const moth of mothArray) {
+    const transform = Transform.get(moth)
+    
+    // Add the MothComponent with random properties for each moth
+    MothComponent.create(moth, {
+      flySpeed: 0.005 + Math.random() * 0.03, // Random speed between 0.005 and 0.035 (wide range for variety)
+      verticalSpeed: 0.015 + Math.random() * 0.015, // More variation in bobbing height
+      horizontalOffset: Math.random() > 0.5 ? 1 : 0, // 50% orbit (0), 50% fly away (1)
+      startX: transform.position.x, // Store initial X position for orbiting
+      startY: transform.position.y, // Store initial Y position for smooth bobbing
+      startZ: transform.position.z // Store initial Z position for orbiting
+    })
+    
+    // Ensure moths are visible
+    if (VisibilityComponent.has(moth)) {
+      VisibilityComponent.getMutable(moth).visible = true
+    } else {
+      VisibilityComponent.create(moth, { visible: true })
+    }
+    
+    console.log('Added flying behavior to moth')
+  }
   
   // Handle any existing zombies in the scene (like the girlzombie.glb entity)
   const existingZombies = engine.getEntitiesWith(GltfContainer, Transform)
@@ -454,6 +549,7 @@ engine.addSystem(updateGameTimer)
 engine.addSystem(updateZombieSpawning)
 engine.addSystem(updateZombieMovement)
 engine.addSystem(handleZombieShooting)
+engine.addSystem(updateMothFlying) // Add moth flying system
 
 export function main() {
   console.log('Scene initialized - waiting for user to click START')
