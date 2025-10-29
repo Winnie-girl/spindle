@@ -30,6 +30,7 @@ export enum EntityNames {
   Skull_02_2 = "Skull 02_2",
   Skull_02_3 = "Skull 02_3",
   Skull_02_3_4 = "Skull 02_3_4",
+  Wooden_Axe = "Wooden Axe",
   girlzombie_glb = "girlzombie.glb",
   moth_glb = "moth.glb",
   moth_glb_2 = "moth.glb_2",

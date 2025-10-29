@@ -1,4 +1,4 @@
-import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, inputSystem, Schemas, MeshRenderer, Material } from '@dcl/sdk/ecs'
+import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, inputSystem, Schemas, MeshRenderer, Material, AvatarAttach, AvatarAnchorPointType } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion, Color3, Color4 } from '@dcl/sdk/math'
 import { movePlayerTo } from '~system/RestrictedActions'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
@@ -540,6 +540,31 @@ function updateCatMovement() {
   }
 }
 
+// Function to attach axe to player's hand
+function attachWeaponToPlayer() {
+  const axeEntities = engine.getEntitiesByTag('axe')
+  const axeArray: Entity[] = Array.from(axeEntities)
+  
+  if (axeArray.length > 0) {
+    const axe = axeArray[0]
+    
+    // Attach to player's right hand
+    AvatarAttach.create(axe, {
+      anchorPointId: AvatarAnchorPointType.AAPT_RIGHT_HAND
+    })
+    
+    // Scale and position it appropriately
+    const transform = Transform.getMutable(axe)
+    transform.scale = Vector3.create(1, 1, 1)
+    // Position down on the handle (negative Y moves grip down the shaft)
+    transform.position = Vector3.create(0, -0.5, 0)
+    // Rotate so blade points forward
+    transform.rotation = Quaternion.fromEulerDegrees(0, 90, 0)
+    
+    console.log('Axe attached to player hand')
+  }
+}
+
 // Make startGame globally available
 (globalThis as any).startGame = startGame
 
@@ -612,6 +637,9 @@ function setupScene() {
   const floorEntities = engine.getEntitiesByTag('floor')
   const floorArray: Entity[] = Array.from(floorEntities)
   console.log(`Found ${floorArray.length} floor entities`)
+  
+  // Attach axe to player's hand
+  attachWeaponToPlayer()
   
   // Handle any existing zombies in the scene (like the girlzombie.glb entity)
   const existingZombies = engine.getEntitiesWith(GltfContainer, Transform)

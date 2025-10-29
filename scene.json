@@ -2,8 +2,8 @@
   "ecs7": true,
   "runtimeVersion": "7",
   "display": {
-    "title": "GameHack",
-    "description": "Empty Scene Template",
+    "title": "spindle",
+    "description": "clear the webs\neliminate purple haired zombies",
     "favicon": "favicon_asset",
     "navmapThumbnail": ""
   },
@@ -25,7 +25,7 @@
   },
   "spawnPoints": [
     {
-      "name": "spawn1",
+      "name": "Spawn Point 1",
       "default": true,
       "position": {
         "x": [
@@ -56,9 +56,12 @@
     "voiceChat": "enabled",
     "portableExperiences": "enabled"
   },
-  "skyboxConfig": {},
+  "skyboxConfig": {
+    "fixedTime": 43200
+  },
   "source": {
     "origin": "creator-hub",
     "projectId": "aa4b0deb-afc8-4f77-b0f0-038b3f57f012"
-  }
+  },
+  "rating": "T"
 }
