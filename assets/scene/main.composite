@@ -221,7 +221,7 @@
             "position": {
               "x": 11,
               "y": 12,
-              "z": 3
+              "z": 2.75
             },
             "scale": {
               "x": 0.8999999761581421,
@@ -1395,9 +1395,9 @@
         "579": {
           "json": {
             "position": {
-              "x": 8,
-              "y": 11,
-              "z": 3
+              "x": 7.5,
+              "y": 10.5,
+              "z": 3.75
             },
             "scale": {
               "x": 0.4000000059604645,
@@ -3280,7 +3280,9 @@
             "description": "clear the webs\neliminate purple haired zombies",
             "thumbnail": "",
             "ageRating": "T",
-            "categories": [],
+            "categories": [
+              "game"
+            ],
             "author": "SDK",
             "email": "",
             "tags": [],

@@ -1,4 +1,4 @@
-import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, inputSystem, Schemas, MeshRenderer, Material, AvatarAttach, AvatarAnchorPointType } from '@dcl/sdk/ecs'
+ import { engine, Entity, Transform, LightSource, VisibilityComponent, Tags, GltfContainer, PointerEvents, InputAction, PointerEventType, MeshCollider, inputSystem, Schemas, MeshRenderer, Material, AvatarAttach, AvatarAnchorPointType } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion, Color3, Color4 } from '@dcl/sdk/math'
 import { movePlayerTo } from '~system/RestrictedActions'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'

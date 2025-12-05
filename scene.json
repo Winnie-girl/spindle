@@ -13,7 +13,9 @@
     "email": ""
   },
   "main": "bin/index.js",
-  "tags": [],
+  "tags": [
+    "game"
+  ],
   "scene": {
     "parcels": [
       "0,1",
@@ -63,5 +65,8 @@
     "origin": "creator-hub",
     "projectId": "aa4b0deb-afc8-4f77-b0f0-038b3f57f012"
   },
-  "rating": "T"
+  "rating": "T",
+  "worldConfiguration": {
+    "name": "disconoodle.dcl.eth"
+  }
 }
